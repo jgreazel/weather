@@ -1,7 +1,10 @@
-import { useEffect } from "preact/hooks";
-import { Logo } from "./logo";
+import { useEffect, useState } from "preact/hooks";
+
+import { WeatherCard } from "./components";
 
 export function App(props) {
+  const [weather, setWeather] = useState(null);
+
   // getting weather data for omaha
   useEffect(() => {
     fetch("http://localhost:8080/weather/omaha", {
@@ -12,27 +15,18 @@ export function App(props) {
       credentials: "include",
     })
       .then((response) => response.json())
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log(json);
+        setWeather(json);
+      })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
   return (
-    <>
-      {/* <Logo />
-      <p>Hello Vite + Preact!</p>
-      <p>
-        <a
-          class="link"
-          href="https://preactjs.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Preact
-        </a>
-      </p> */}
-      hi
-    </>
+    <div class="bg-purple-200 h-screen">
+      {weather && <WeatherCard data={weather} />}
+    </div>
   );
 }
