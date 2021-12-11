@@ -1,0 +1,18 @@
+{
+  "name": "weather",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "perosnal weather app using open weather api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "Jon Greazel",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
