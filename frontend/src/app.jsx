@@ -1,32 +1,14 @@
-import { useEffect, useState } from "preact/hooks";
+import { WeatherCard, Loading } from "./components";
+import { useWeatherData } from "./hooks";
 
-import { WeatherCard } from "./components";
-
+// todo: add a plus icon to search cities and add new cards
+// will also have to give useWeatherData inputs
 export function App(props) {
-  const [weather, setWeather] = useState(null);
-
-  // getting weather data for omaha
-  useEffect(() => {
-    fetch("http://localhost:8080/weather/omaha", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        setWeather(json);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data: weatherData, loading } = useWeatherData();
 
   return (
     <div class="bg-purple-200 h-screen">
-      {weather && <WeatherCard data={weather} />}
+      {loading ? <Loading /> : <WeatherCard data={weatherData} />}
     </div>
   );
 }
