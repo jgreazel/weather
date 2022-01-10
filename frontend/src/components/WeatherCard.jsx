@@ -1,6 +1,7 @@
 const WeatherCard = (props) => {
   const { name, main, weather } = props.data;
 
+  // todo could easily just change naming convention of icons
   const getWeatherIcon = (icon) => {
     const basePath = "./src/assets/";
     switch (icon) {
@@ -9,8 +10,16 @@ const WeatherCard = (props) => {
     }
   };
 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+    });
+  } else {
+    console.log("nada");
+  }
+
   return (
-    <div class="p-4 max-w-xs mx-auto bg-white rounded-xl shadow-lg">
+    <div class="p-4 max-w-xs bg-white rounded-xl shadow-lg">
       <div class="flex justify-between m-2">
         <div class="text-xl font-medium text-black">{name}</div>
         <img

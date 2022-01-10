@@ -1,3 +1,4 @@
+import React from "react";
 import { WeatherCard, Loading } from "./components";
 import { useWeatherData } from "./hooks";
 
@@ -8,7 +9,13 @@ export function App(props) {
 
   return (
     <div class="bg-purple-200 h-screen">
-      {loading ? <Loading /> : <WeatherCard data={weatherData} />}
+      {loading ? (
+        <Loading />
+      ) : (
+        <div class="flex flex-col space-y-4">
+          <WeatherCard data={weatherData} />
+        </div>
+      )}
     </div>
   );
 }
