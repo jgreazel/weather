@@ -1,0 +1,8 @@
+{
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": [],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  }
+}

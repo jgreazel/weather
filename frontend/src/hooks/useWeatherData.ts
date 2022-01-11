@@ -1,23 +1,20 @@
 import { useEffect, useState } from "preact/hooks";
 
-const useWeatherData = () => {
+const useWeatherData = (coordinates?: {
+  latitude: number;
+  longitude: number;
+}) => {
   const [loading, setLoading] = useState(true);
   const [weather, setWeather] = useState();
 
   const baseUrl = "http://localhost:8080/weather";
 
-  useEffect(() => {
-    // TODO this doesn't work rn. i want it to fetch weather based on current location
-    let city = "/omaha";
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        city = `/${position.coords.latitude}/${position.coords.longitude}`;
-      });
-    } else {
-      city = "/omaha";
-    }
+  const location = coordinates
+    ? `${coordinates.latitude}/${coordinates.longitude}`
+    : "omaha";
 
-    fetch(baseUrl + city, {
+  useEffect(() => {
+    fetch(baseUrl + "/" + location, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -26,6 +23,8 @@ const useWeatherData = () => {
     })
       .then((response) => response.json())
       .then((json) => {
+        // todo remove after testing
+        console.log(json);
         setWeather(json);
         setLoading(false);
       })
