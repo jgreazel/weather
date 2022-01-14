@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { WeatherCard, Loading, AddButton } from "./components";
+import { WeatherCard, Loading, AddButton, Canvas } from "./components";
 import { useWeatherData, useBrowserLocation } from "./hooks";
 
 // todo: add a plus icon to search cities and add new cards
@@ -16,16 +16,18 @@ export function App(props) {
   );
 
   return (
-    <div class="bg-blue-100 h-screen p-4">
+    <div class="bg-blue-200 h-screen p-4">
       <div class="mx-auto max-w-min">
         {loadingWeather ? (
           <Loading />
         ) : (
           <div class="flex flex-col space-y-4">
-            <AddButton onClick={() => setCount(count + 1)} />
+            {/* <AddButton onClick={() => setCount(count + 1)} />
             {Array.from({ length: count }).map((_, i) => (
               <WeatherCard data={weatherData} />
-            ))}
+            ))} */}
+            <WeatherCard data={weatherData} />
+            <Canvas />
           </div>
         )}
       </div>
